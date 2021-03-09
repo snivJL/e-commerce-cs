@@ -59,12 +59,15 @@ userController.topup = async (req, res, next) => {
   try {
     const userId = req.params.id;
     const topup = req.body.topup;
-    const user = await User.findByIdAndUpdate(
+    const user = await User.findOneAndUpdate(
       { _id: userId },
       {
         $inc: { balance: topup },
-      }
+      },
+      { new: true }
     );
+
+    console.log(user);
 
     utilsHelper.sendResponse(
       res,
@@ -73,6 +76,42 @@ userController.topup = async (req, res, next) => {
       { user },
       null,
       "Balance updated!"
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+userController.makePayment = async (req, res, next) => {
+  const { orderId } = req.body;
+  const userId = req.params.id;
+
+  if (!orderId) return next(new Error("401 - product not found in body"));
+
+  try {
+    const price = await Order.findByIdAndUpdate({ _id: orderId }).select(
+      "total"
+    );
+    const user = await User.findByIdAndUpdate(
+      { _id: userId },
+      { $inc: { balance: -price.total } },
+      { new: true }
+    );
+
+    if (!user) return next(new Error("401 - User not found"));
+
+    const product = await Order.findByIdAndUpdate(
+      { _id: orderId },
+      { status: "paid" },
+      { new: true }
+    );
+    utilsHelper.sendResponse(
+      res,
+      200,
+      true,
+      { user, product },
+      null,
+      "User balance updated"
     );
   } catch (error) {
     next(error);

@@ -33,6 +33,12 @@ router.get(
  * @description User can make payment
  * @access Login required
  */
+router.put(
+  "/:id/payment",
+  authMiddleware.loginRequired,
+  userController.makePayment
+);
+
 /**
  * @route PUT api/user/:id/topup
  * @description Top-up user balance
