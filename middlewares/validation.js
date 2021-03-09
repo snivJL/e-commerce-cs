@@ -41,13 +41,4 @@ validators.checkObjectId = (paramId) => {
   return true;
 };
 
-validators.productValidator = () => {
-  return [
-    check("name").notEmpty().withMessage("Name is required"),
-    check("description").notEmpty().withMessage("Description is required"),
-    check("price").notEmpty().withMessage("Price is required"),
-    check("images").notEmpty().withMessage("At least one image is required"),
-  ];
-};
-
 module.exports = validators;

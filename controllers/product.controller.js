@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Product = require("../models/Product");
 
 const utilsHelper = require("../helpers/utils.helper");
@@ -76,4 +75,22 @@ productController.updateProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+productController.deleteProduct = async (req, res, next) => {
+  const productId = req.params.id;
+
+  try {
+    const product = await Product.findByIdAndUpdate(
+      { _id: productId },
+      { isDeleted: true }
+    );
+    if (!product) {
+      return next(new Error("Product not found"));
+    }
+    utilsHelper.sendResponse(res, 200, true, product, null, "Product deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = productController;

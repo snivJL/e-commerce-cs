@@ -44,10 +44,17 @@ router.put(
   authMiddleware.adminRequired,
   productController.updateProduct
 );
+
 /**
  * @route DELETE api/product/:id/delete
  * @description Admin can delete product
  * @access Admin required
  */
+router.delete(
+  "/:id/delete",
+  authMiddleware.loginRequired,
+  authMiddleware.adminRequired,
+  productController.deleteProduct
+);
 
 module.exports = router;

@@ -22,7 +22,7 @@ authMiddleware.loginRequired = async (req, res, next) => {
         else if (err.name === "TokenExpiredError")
           return next(new Error("401 - Token is invalid"));
       }
-
+      console.log(decoded);
       req.userId = decoded._id;
       console.log(req.userId);
       next();
