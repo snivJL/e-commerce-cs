@@ -66,7 +66,7 @@ const PublicNavbar = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(userActions.getCurrentUser());
+    if (isAuthenticated) dispatch(userActions.getCurrentUser());
   }, [dispatch]);
   return (
     <div>
