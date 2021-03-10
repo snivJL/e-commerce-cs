@@ -4,7 +4,7 @@ const authController = require("../controllers/auth.controller");
 const passport = require("passport");
 
 /**
- * @route POST api/auth/login
+ * @route POST api/auth
  * @description User can Login with email
  * @access Public
  */

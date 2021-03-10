@@ -5,11 +5,14 @@ const userReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case types.CREATE_USER_REQUEST:
+    case types.GET_CURRENT_USER_REQUEST:
       return { ...state, loading: true };
     case types.CREATE_USER_SUCCESS:
-      return { ...state, user: payload };
+    case types.GET_CURRENT_USER_SUCCESS:
+      return { ...state, user: payload, loading: false };
     case types.CREATE_USER_FAIL:
-      return { ...state, error: payload };
+    case types.GET_CURRENT_USER_FAIL:
+      return { ...state, error: payload, loading: false };
     default:
       return state;
   }

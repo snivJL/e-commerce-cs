@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import userActions from "../redux/actions/user.actions";
+import authActions from "../redux/actions/auth.actions";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   const dispatch = useDispatch();
-  // const history = useHistory();
-  // const auth = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   if (!auth.errors && auth.isAuth) history.push("/login");
-  // }, [auth.errors, history, auth.isAuth]);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const validate = (values) => {
     const errors = {};
-    if (!values.name) {
-      errors.name = "Required";
-    }
     if (!values.password) {
       errors.password = "Required";
     } else if (values.password.length > 20) {
@@ -38,15 +31,17 @@ const RegisterPage = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
       email: "",
       password: "",
     },
     validate,
     onSubmit: (values) => {
-      dispatch(userActions.register(values));
+      dispatch(authActions.login(values));
     },
   });
+
+  if (isAuthenticated) return <Redirect to="/" />;
+
   return (
     <Container>
       <Row className="justify-content-center ">
@@ -57,21 +52,7 @@ const RegisterPage = () => {
             onSubmit={formik.handleSubmit}
             className="align-items-center border rounded p-4"
           >
-            <h2 className="text-center">Sign Up</h2>
-            <Form.Group controlId="formGroupEmail">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your name"
-                name="name"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.name}
-              />
-              {formik.touched.name && formik.errors.name ? (
-                <div>{formik.errors.name}</div>
-              ) : null}
-            </Form.Group>
+            <h2 className="text-center">Log In</h2>
             <Form.Group controlId="formGroupEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -101,7 +82,7 @@ const RegisterPage = () => {
               ) : null}
             </Form.Group>
             <Button type="submit" block>
-              Sign Up
+              Sign In
             </Button>
           </Form>
         </Col>
@@ -110,4 +91,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

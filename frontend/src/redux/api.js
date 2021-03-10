@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_API + "api",
   headers: {
     "Content-Type": "application/json",
-    authorization: "Bearer "+ localStorage.getItem("accessToken")
+    authorization: "Bearer " + localStorage.getItem("token"),
   },
 });
 
@@ -30,7 +30,7 @@ api.interceptors.response.use(
     let errorMsg = error.message || "";
     if (error.errors && error.errors.message)
       errorMsg = errorMsg + ": " + error.errors.message;
-    toast.error(errorMsg);
+    // toast.error(errorMsg);
     return Promise.reject(error);
   }
 );

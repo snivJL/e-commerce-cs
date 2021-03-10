@@ -17,4 +17,18 @@ userActions.register = (user) => async (dispatch) => {
   }
 };
 
+userActions.getCurrentUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_CURRENT_USER_REQUEST });
+    const { data } = await api.get("/user/me");
+    dispatch({ type: types.GET_CURRENT_USER_SUCCESS, payload: data.data.user });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: types.GET_CURRENT_USER_FAIL,
+      payload: error.errors.message,
+    });
+  }
+};
+
 export default userActions;

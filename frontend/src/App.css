@@ -49,9 +49,16 @@
   color: black !important;
   background-color: white;
 }
+.navbar-nav-dropdown {
+  color: white !important;
+  max-width: fit-content;
+}
 
 @media only screen and (max-width: 600px) {
   .navbar-brand {
+    text-align: center;
+  }
+  .navbar-nav-dropdown {
     text-align: center;
   }
   .navbar-nav-link {
@@ -62,6 +69,10 @@
 @media only screen and (max-width: 992px) {
   .navbar-brand {
     justify-self: center !important;
+  }
+  .navbar-nav-dropdown {
+    text-align: center;
+    align-self: center;
   }
   .navbar-nav-link {
     margin: 5px auto 5px auto;
