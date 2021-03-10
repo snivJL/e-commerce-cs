@@ -4,21 +4,21 @@ const userController = require("../controllers/user.controller");
 const authMiddleware = require("../middlewares/auth");
 
 /**
- * @route POST api/users
+ * @route POST api/user
  * @description Register new user
  * @access Public
  */
 router.post("/", userController.register);
 
 /**
- * @route GET api/users/me
+ * @route GET api/user/me
  * @description Return current user info
  * @access Login required
  */
 router.get("/me", authMiddleware.loginRequired, userController.getCurrentUser);
 
 /**
- * @route GET api/users/:id/order
+ * @route GET api/user/:id/order
  * @description Return list orders of current user
  * @access Login Required or Admin authorized
  */
