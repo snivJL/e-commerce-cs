@@ -14,6 +14,13 @@ const { check } = require("express-validator");
 router.get("/", productController.getAllProducts);
 
 /**
+ * @route GET api/product/:id
+ * @description User can see one single product
+ * @access Public
+ */
+router.get("/:id", productController.getSingleProduct);
+
+/**
  * @route POST api/product/add
  * @description Admin can add product
  * @access Admin Required

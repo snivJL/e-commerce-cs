@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import Cart from "./Cart";
 import { Squash as Hamburger } from "hamburger-react";
 import { useSelector, useDispatch } from "react-redux";
 import authActions from "../../redux/actions/auth.actions";
@@ -67,13 +68,15 @@ const PublicNavbar = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (isAuthenticated) dispatch(userActions.getCurrentUser());
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
+
   return (
     <div>
       <Navbar expand="lg" bg="custom" variant="dark">
         <Navbar.Brand as={Link} to="/">
           CoderShop
         </Navbar.Brand>
+
         <SearchBar classes={"d-none d-lg-block"} />
         <Navbar.Toggle
           children={<Hamburger toggled={isOpen} toggle={setOpen} />}
@@ -81,7 +84,9 @@ const PublicNavbar = () => {
           bsPrefix="navbar-toggler hamburger"
         />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ml-auto ">
+          <Nav className="ml-auto">
+            <Cart />
+
             {isAuthenticated ? <AuthLinks /> : <PublicLinks />}
             <SearchBar classes={"d-lg-none"} />
           </Nav>

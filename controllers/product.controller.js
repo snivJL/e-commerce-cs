@@ -40,6 +40,25 @@ productController.getAllProducts = async (req, res, next) => {
     next(error);
   }
 };
+
+productController.getSingleProduct = async (req, res, next) => {
+  const productId = req.params.id;
+  try {
+    const product = await Product.findById(productId);
+    if (!product) return next(new Error("401 - Product not found"));
+
+    utilsHelper.sendResponse(
+      res,
+      200,
+      true,
+      { product },
+      null,
+      "Product detail found"
+    );
+  } catch (error) {
+    next(error);
+  }
+};
 productController.createProduct = async (req, res, next) => {
   try {
     const { name, description, price, images } = req.body;

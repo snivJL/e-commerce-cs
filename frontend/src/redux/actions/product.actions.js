@@ -18,4 +18,21 @@ productActions.getAllProducts = () => async (dispatch) => {
   }
 };
 
+productActions.getSingleProduct = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_SINGLE_PRODUCT_REQUEST });
+    const { data } = await api.get(`/product/${id}`);
+    dispatch({
+      type: types.GET_SINGLE_PRODUCT_SUCCESS,
+      payload: data.data.product,
+    });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: types.GET_SINGLE_PRODUCT_FAIL,
+      payload: error.errors.message,
+    });
+  }
+};
+
 export default productActions;
