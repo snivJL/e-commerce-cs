@@ -29,7 +29,7 @@ const ProductPage = () => {
 
   const addToCart = () => {
     dispatch(orderActions.addToCart(qty, product));
-    history.push(`/cart/${productId.id}?${qty}`);
+    // history.push(`/cart/${productId.id}?${qty}`);
   };
   return (
     <>
@@ -79,7 +79,7 @@ const ProductPage = () => {
                         <Form.Control
                           as="select"
                           value={qty}
-                          onChange={(e) => setQty(e.target.value)}
+                          onChange={(e) => setQty(parseInt(e.target.value))}
                         >
                           {fakeStock.map((x) => (
                             <option key={x}>{x}</option>
