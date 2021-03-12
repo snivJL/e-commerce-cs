@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import orderActions from "../redux/actions/order.actions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
@@ -35,6 +35,7 @@ const ShippingPage = () => {
     validate,
     onSubmit: (values) => {
       dispatch(orderActions.saveShippingAddress(values));
+      history.push("/payment");
     },
   });
 
@@ -107,7 +108,7 @@ const ShippingPage = () => {
               ) : null}
             </Form.Group>
             <Button type="submit" block>
-              Sign Up
+              Continue
             </Button>
           </Form>
         </Col>

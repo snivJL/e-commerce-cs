@@ -3,6 +3,7 @@ import * as types from "../constants/order.constants";
 const initialState = {
   cart: JSON.parse(localStorage.getItem("cartItems")) || [],
   shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || [],
+  paymentMethod: JSON.parse(localStorage.getItem("paymentMethod")) || [],
   loading: false,
 };
 const orderReducer = (state = initialState, action) => {
@@ -39,6 +40,8 @@ const orderReducer = (state = initialState, action) => {
     }
     case types.SAVE_SHIPPING_ADDRESS:
       return { ...state, shippingAddress: payload };
+    case types.SAVE_PAYMENT_METHOD:
+      return { ...state, paymentMethod: payload };
     default:
       return state;
   }

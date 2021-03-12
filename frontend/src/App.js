@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ShippingPage from "./pages/ShippingPage";
+import PaymentPage from "./pages/PaymentPage";
 import AlertMsg from "./components/layout/AlertMsg";
 import { Container } from "react-bootstrap";
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/auth" component={RegisterPage} />;
             <Route path="/login" component={LoginPage} />;
             <Route path="/shipping" component={ShippingPage} />;
+            <Route path="/payment" component={PaymentPage} />;
             <Route path="/product/:id" component={ProductPage} />;
             <Route path="/cart/:id?" component={CartPage} />;
           </Switch>

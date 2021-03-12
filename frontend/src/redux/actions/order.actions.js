@@ -17,4 +17,9 @@ orderActions.saveShippingAddress = (data) => (dispatch) => {
   dispatch({ type: types.SAVE_SHIPPING_ADDRESS, payload: data });
   localStorage.setItem("shippingAddress", JSON.stringify(data));
 };
+
+orderActions.savePaymentMethod = (data) => (dispatch) => {
+  dispatch({ type: types.SAVE_PAYMENT_METHOD, payload: data.paymentMethod });
+  localStorage.setItem("paymentMethod", JSON.stringify(data));
+};
 export default orderActions;
