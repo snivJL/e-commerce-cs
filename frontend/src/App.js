@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ShippingPage from "./pages/ShippingPage";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
 import PaymentPage from "./pages/PaymentPage";
 import AlertMsg from "./components/layout/AlertMsg";
 import { Container } from "react-bootstrap";
@@ -17,13 +18,14 @@ const App = () => {
       <AlertMsg />
       <PublicNavbar />
       <main>
-        <Container>
+        <Container bsPrefix="container containerCustom">
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/auth" component={RegisterPage} />;
             <Route path="/login" component={LoginPage} />;
             <Route path="/shipping" component={ShippingPage} />;
             <Route path="/payment" component={PaymentPage} />;
+            <Route path="/placeorder" component={PlaceOrderPage} />;
             <Route path="/product/:id" component={ProductPage} />;
             <Route path="/cart/:id?" component={CartPage} />;
           </Switch>

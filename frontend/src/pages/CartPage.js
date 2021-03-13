@@ -19,10 +19,11 @@ const CartPage = () => {
   const fakeStock = [1, 2, 3, 4, 5, 6, 7, 8];
   const history = useHistory();
   const cart = useSelector((state) => state.order.cart);
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
 
-  const checkoutHandler = () => {
+  const checkoutHandler = (e) => {
+    e.preventDefault();
     isAuthenticated ? history.push("/shipping") : history.push("/login");
   };
   return (
@@ -95,7 +96,7 @@ const CartPage = () => {
                     <ListGroup.Item>
                       <Button
                         type="button"
-                        onClick={checkoutHandler}
+                        onClick={(e) => checkoutHandler(e)}
                         className="btn btn-block"
                         disabled={cart.length === 0}
                       >

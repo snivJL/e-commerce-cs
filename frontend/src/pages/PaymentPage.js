@@ -15,7 +15,6 @@ const PaymentPage = () => {
   const validate = (values) => {
     const errors = {};
     if (!values.paymentMethod) {
-      console.log("HERE", values);
       errors.paymentMethod = "Required";
     }
 
@@ -23,12 +22,12 @@ const PaymentPage = () => {
   };
   const formik = useFormik({
     initialValues: {
-      paymentMethod: "paypal",
+      paymentMethod: "test",
     },
     validate,
     onSubmit: (values) => {
-      console.log("submit", values);
       dispatch(orderActions.savePaymentMethod(values));
+      history.push("/placeorder");
     },
   });
 
@@ -45,6 +44,16 @@ const PaymentPage = () => {
             <Form.Group>
               <Form.Label as="legend">Select Method</Form.Label>
               <Col>
+                <Form.Check
+                  type="radio"
+                  label="Test"
+                  id="test"
+                  name="paymentMethod"
+                  value="test"
+                  checked
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                ></Form.Check>
                 <Form.Check
                   type="radio"
                   label="Paypal or credit card"

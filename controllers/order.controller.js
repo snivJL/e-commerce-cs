@@ -10,11 +10,18 @@ let orderController = {};
 
 orderController.createOrder = async (req, res, next) => {
   try {
-    const { userId, products, status, total } = req.body;
+    const userId = req.userId;
+    const { products, status, total, shipping, price } = req.body;
     validator.checkObjectId(userId);
     products.map((p) => validator.checkObjectId(p));
 
-    const order = await Order.create({ userId, products, status, total });
+    const order = await Order.create({
+      userId,
+      products,
+      status,
+      shipping,
+      total: price,
+    });
 
     utilsHelper.sendResponse(res, 200, true, { order }, null, "Order created");
   } catch (error) {

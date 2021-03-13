@@ -17,7 +17,6 @@ import orderActions from "../redux/actions/order.actions";
 
 const ProductPage = () => {
   const [qty, setQty] = useState(1);
-  const history = useHistory();
   const productId = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.selectedProduct);

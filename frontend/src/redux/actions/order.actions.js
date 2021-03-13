@@ -1,5 +1,6 @@
 import * as types from "../constants/order.constants";
 import { toast } from "react-toastify";
+import api from "../api";
 const orderActions = {};
 
 orderActions.addToCart = (qty = 1, product) => (dispatch, getState) => {
@@ -20,6 +21,21 @@ orderActions.saveShippingAddress = (data) => (dispatch) => {
 
 orderActions.savePaymentMethod = (data) => (dispatch) => {
   dispatch({ type: types.SAVE_PAYMENT_METHOD, payload: data.paymentMethod });
-  localStorage.setItem("paymentMethod", JSON.stringify(data));
+  localStorage.setItem("paymentMethod", JSON.stringify(data.paymentMethod));
+};
+
+orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
+  try {
+    const formatOrder = {};
+    formatOrder.products = order.cart.map((p) => p.product._id);
+    formatOrder.shipping = order.shippingAddress;
+    formatOrder.status = "paid";
+    formatOrder.price = cartPrice;
+    console.log(order, "format", formatOrder);
+    dispatch({ type: types.CREATE_ORDER_REQUEST });
+    api.post("/order/add", formatOrder);
+  } catch (error) {
+    dispatch({ type: types.CREATE_ORDER_FAIL, payload: error.errors.message });
+  }
 };
 export default orderActions;

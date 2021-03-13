@@ -15,10 +15,9 @@ router.post(
   authMiddleware.loginRequired,
   authMiddleware.adminRequired,
   validators.validate([
-    check("userId").notEmpty().withMessage("USerId is required"),
     check("products")
       .isArray({ min: 1 })
-      .withMessage("Prodcut list is required"),
+      .withMessage("Product list is required"),
   ]),
   orderController.createOrder
 );
