@@ -4,7 +4,7 @@ const initialState = {
   cart: JSON.parse(localStorage.getItem("cartItems")) || [],
   shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || [],
   paymentMethod: JSON.parse(localStorage.getItem("paymentMethod")) || [],
-  loading: false,
+  loading: true,
 };
 const orderReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -42,6 +42,12 @@ const orderReducer = (state = initialState, action) => {
       return { ...state, shippingAddress: payload };
     case types.SAVE_PAYMENT_METHOD:
       return { ...state, paymentMethod: payload };
+    case types.CREATE_ORDER_REQUEST:
+      return { ...state, loading: true };
+    case types.CREATE_ORDER_SUCCESS:
+      return { ...state, loading: false };
+    case types.CREATE_ORDER_FAIL:
+      return { ...state, loading: false };
     default:
       return state;
   }

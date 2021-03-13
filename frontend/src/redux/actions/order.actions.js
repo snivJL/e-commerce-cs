@@ -33,7 +33,8 @@ orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
     formatOrder.total = cartPrice;
     console.log(order, "format", formatOrder);
     dispatch({ type: types.CREATE_ORDER_REQUEST });
-    api.post("/order/add", formatOrder);
+    const { data } = await api.post("/order/add", formatOrder);
+    dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: types.CREATE_ORDER_FAIL, payload: error.errors.message });
   }

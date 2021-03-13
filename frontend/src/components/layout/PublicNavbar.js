@@ -16,10 +16,14 @@ const AdminLinks = () => {
         title="Admin"
         id="basic-nav-dropdown"
       >
-        <NavDropdown.Item href="#action/3.1">Create Product</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/admin/product/create">
+          Create Product
+        </NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Edit Product</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Top Up</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.4">List Products</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/admin/product/list">
+          List Products
+        </NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
       </NavDropdown>

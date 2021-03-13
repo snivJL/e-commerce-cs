@@ -9,11 +9,12 @@ import {
   Button,
   Form,
 } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import productActions from "../redux/actions/product.actions";
 import Loader from "../components/layout/Loader";
 import orderActions from "../redux/actions/order.actions";
+import Rating from "../components/products/Rating";
 
 const ProductPage = () => {
   const [qty, setQty] = useState(1);
@@ -58,6 +59,9 @@ const ProductPage = () => {
                 <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
                 <ListGroup.Item>
                   Description: {product.description}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Rating value={Math.random() * 5} />
                 </ListGroup.Item>
               </ListGroup>
             </Col>

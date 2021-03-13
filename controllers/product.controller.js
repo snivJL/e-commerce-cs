@@ -73,11 +73,11 @@ productController.createProduct = async (req, res, next) => {
 productController.updateProduct = async (req, res, next) => {
   const { name, description, price, images } = req.body;
   const productId = req.params.id;
-
+  console.log("UPDATE CONTROLLER", req.body);
   let fields = {};
 
   if (name) fields.name = name;
-  if (description) fields.description = name;
+  if (description) fields.description = description;
   if (price) fields.price = price;
   if (images) fields.images = images;
   try {

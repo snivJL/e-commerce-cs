@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ShippingPage from "./pages/ShippingPage";
+import CreateProductPage from "./pages/admin/CreateProductPage";
+import ProductListPage from "./pages/admin/ProductListPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import PaymentPage from "./pages/PaymentPage";
 import AlertMsg from "./components/layout/AlertMsg";
@@ -25,6 +27,8 @@ const App = () => {
             <Route path="/login" component={LoginPage} />;
             <Route path="/shipping" component={ShippingPage} />;
             <Route path="/payment" component={PaymentPage} />;
+            <Route path="/admin/product/create" component={CreateProductPage} />
+            <Route path="/admin/product/list" component={ProductListPage} />
             <Route path="/placeorder" component={PlaceOrderPage} />;
             <Route path="/product/:id" component={ProductPage} />;
             <Route path="/cart/:id?" component={CartPage} />;
