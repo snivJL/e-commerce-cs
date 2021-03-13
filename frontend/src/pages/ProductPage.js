@@ -21,6 +21,10 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.selectedProduct);
   const loading = useSelector((state) => state.product.loading);
+  const image = useSelector(
+    (state) => state.product.selectedProduct.images[0].imageUrl
+  );
+
   const fakeStock = [1, 2, 3, 4, 5, 6, 7, 8];
   useEffect(() => {
     dispatch(productActions.getSingleProduct(productId.id));
@@ -33,7 +37,10 @@ const ProductPage = () => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <>
+          {console.log("loading")}
+          <Loader />
+        </>
       ) : (
         <>
           <Link className="btn btn-light my-3 " to="/">
@@ -41,7 +48,7 @@ const ProductPage = () => {
           </Link>
           <Row>
             <Col md={6}>
-              <Image fluid src={product.images[0].imageUrl}></Image>
+              <Image fluid src={image}></Image>
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">

@@ -1,6 +1,10 @@
 import * as types from "../constants/product.constants";
 
-const initialState = { loading: true, products: [], selectedProduct: {} };
+const initialState = {
+  loading: true,
+  products: [],
+  selectedProduct: { images: [{}] },
+};
 const productReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {

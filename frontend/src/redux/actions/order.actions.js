@@ -30,7 +30,7 @@ orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
     formatOrder.products = order.cart.map((p) => p.product._id);
     formatOrder.shipping = order.shippingAddress;
     formatOrder.status = "paid";
-    formatOrder.price = cartPrice;
+    formatOrder.total = cartPrice;
     console.log(order, "format", formatOrder);
     dispatch({ type: types.CREATE_ORDER_REQUEST });
     api.post("/order/add", formatOrder);
