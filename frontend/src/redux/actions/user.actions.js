@@ -31,4 +31,36 @@ userActions.getCurrentUser = () => async (dispatch) => {
   }
 };
 
+userActions.getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_USERS_REQUEST });
+    const { data } = await api.get("/user");
+    dispatch({ type: types.GET_USERS_SUCCESS, payload: data.data.users });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: types.GET_USERS_FAIL,
+      payload: error.errors.message,
+    });
+  }
+};
+
+userActions.topUpUser = (userId, topup) => async (dispatch) => {
+  try {
+    dispatch({ type: types.TOPUP_USER_REQUEST });
+    const { data } = await api.put(`/user/${userId}/topup`, { topup });
+    dispatch({ type: types.TOPUP_USER_SUCCESS, payload: data.data.user });
+    toast.warning("Balance updated");
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: types.TOPUP_USER_FAIL,
+      payload: error.errors.message,
+    });
+  }
+};
+
+userActions.selectUser = (user) => (dispatch) => {
+  dispatch({ type: types.SELECT_USER, payload: user });
+};
 export default userActions;

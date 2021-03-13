@@ -6,7 +6,7 @@ import { Row, ListGroup, Image, Col, Button } from "react-bootstrap";
 import productActions from "../../redux/actions/product.actions";
 import EditProductModal from "./EditProductModal";
 
-const CartPage = () => {
+const ProductListPage = () => {
   const { products, loading } = useSelector((state) => state.product);
   const history = useHistory();
   const dispatch = useDispatch();
@@ -60,4 +60,4 @@ const CartPage = () => {
     </Row>
   );
 };
-export default CartPage;
+export default ProductListPage;

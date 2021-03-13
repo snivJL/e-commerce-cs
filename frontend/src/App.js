@@ -10,6 +10,7 @@ import CartPage from "./pages/CartPage";
 import ShippingPage from "./pages/ShippingPage";
 import CreateProductPage from "./pages/admin/CreateProductPage";
 import ProductListPage from "./pages/admin/ProductListPage";
+import UserListPage from "./pages/admin/UserListPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import PaymentPage from "./pages/PaymentPage";
 import AlertMsg from "./components/layout/AlertMsg";
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/payment" component={PaymentPage} />;
             <Route path="/admin/product/create" component={CreateProductPage} />
             <Route path="/admin/product/list" component={ProductListPage} />
+            <Route path="/admin/user/list" component={UserListPage} />
             <Route path="/placeorder" component={PlaceOrderPage} />;
             <Route path="/product/:id" component={ProductPage} />;
             <Route path="/cart/:id?" component={CartPage} />;

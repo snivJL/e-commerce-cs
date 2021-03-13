@@ -55,6 +55,17 @@ userController.getUserOrders = async (req, res, next) => {
   }
 };
 
+userController.getAllUsers = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const users = await User.find({});
+
+    utilsHelper.sendResponse(res, 200, true, { users }, null, "USer List");
+  } catch (error) {
+    next(error);
+  }
+};
+
 userController.topup = async (req, res, next) => {
   try {
     const userId = req.params.id;
