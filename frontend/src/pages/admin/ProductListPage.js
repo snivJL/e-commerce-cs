@@ -21,7 +21,7 @@ const ProductListPage = () => {
           <Loader />
         ) : (
           <>
-            <ListGroup>
+            <ListGroup variant="flush">
               {products.map((p) => (
                 <ListGroup.Item key={p._id}>
                   <Row className="align-items-center">

@@ -97,7 +97,8 @@ const CartPage = () => {
                       <Button
                         type="button"
                         onClick={(e) => checkoutHandler(e)}
-                        className="btn btn-block"
+                        className="btn-block "
+                        style={{ backgroundColor: "var(--primary)" }}
                         disabled={cart.length === 0}
                       >
                         Proceed to Checkout

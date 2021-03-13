@@ -38,6 +38,7 @@ const CreateProductPage = () => {
     },
     validate,
     onSubmit: (values) => {
+      console.log(values);
       dispatch(productActions.createProduct(values));
     },
   });
