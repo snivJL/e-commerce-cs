@@ -15,6 +15,8 @@ import productActions from "../redux/actions/product.actions";
 import Loader from "../components/layout/Loader";
 import orderActions from "../redux/actions/order.actions";
 import Rating from "../components/products/Rating";
+import ImagesCarousel from "../components/products/ImagesCarousel";
+import AddToCartButton from "../components/order/AddToCartButton";
 
 const ProductPage = () => {
   const [qty, setQty] = useState(1);
@@ -22,9 +24,7 @@ const ProductPage = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.selectedProduct);
   const loading = useSelector((state) => state.product.loading);
-  const image = useSelector(
-    (state) => state.product.selectedProduct.images[0].imageUrl
-  );
+  const images = useSelector((state) => state.product.selectedProduct.images);
 
   const fakeStock = [1, 2, 3, 4, 5, 6, 7, 8];
   useEffect(() => {
@@ -49,7 +49,8 @@ const ProductPage = () => {
           </Link>
           <Row>
             <Col md={6}>
-              <Image fluid src={image}></Image>
+              {/* <Image fluid src={image}></Image> */}
+              <ImagesCarousel images={images} />
             </Col>
             <Col md={3}>
               <ListGroup variant="flush">
@@ -99,14 +100,7 @@ const ProductPage = () => {
                     </Row>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <Button
-                      onClick={addToCart}
-                      className="btn-block"
-                      style={{ backgroundColor: "#fd5c32", border: "none" }}
-                      type="button"
-                    >
-                      Add to cart
-                    </Button>
+                    <AddToCartButton qty={qty} product={product} />
                   </ListGroup.Item>
                 </ListGroup>
               </Card>

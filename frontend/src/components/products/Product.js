@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
+import AddToCartButton from "../../components/order/AddToCartButton";
 
 const Product = ({ product }) => {
   console.log(product);
@@ -22,6 +23,7 @@ const Product = ({ product }) => {
         </Link>
         <Card.Text as="h3">${product.price}</Card.Text>
         <Rating value={Math.random() * 5} />
+        <AddToCartButton product={product} />
       </Card.Body>
     </Card>
   );

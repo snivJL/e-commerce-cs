@@ -3,16 +3,14 @@ import { Nav } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const Cart = () => {
-  const order = useSelector((state) => state.order);
+  const cart = useSelector((state) => state.order.cart);
 
   return (
-    <Nav.Link as={Link} to={`/cart`}>
-      <i className="fas fa-shopping-cart text-white ">
-        {/* {order.cart.length > 0 && (
-          <span className="cart-qty">{order.cart.length}</span>
-        )} */}
-      </i>
-      Cart
+    <Nav.Link as={Link} to={`/cart`} className="d-flex align-items-center">
+      <i className="fas fa-shopping-cart fa-2x text-white pr-1"></i>{" "}
+      <span className="text-white">
+        {cart.reduce((acc, item) => item.qty + acc, 0)}
+      </span>
     </Nav.Link>
   );
 };

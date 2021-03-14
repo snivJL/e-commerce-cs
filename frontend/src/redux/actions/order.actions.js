@@ -14,6 +14,11 @@ orderActions.removeFromCart = (qty = 1, product) => (dispatch, getState) => {
   localStorage.setItem("cartItems", JSON.stringify(getState().order.cart));
 };
 
+orderActions.deleteFromCart = (productId) => (dispatch, getState) => {
+  dispatch({ type: types.DELETE_FROM_CART, payload: productId });
+  localStorage.setItem("cartItems", JSON.stringify(getState().order.cart));
+};
+
 orderActions.saveShippingAddress = (data) => (dispatch) => {
   dispatch({ type: types.SAVE_SHIPPING_ADDRESS, payload: data });
   localStorage.setItem("shippingAddress", JSON.stringify(data));
@@ -39,4 +44,5 @@ orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
     dispatch({ type: types.CREATE_ORDER_FAIL, payload: error.errors.message });
   }
 };
+
 export default orderActions;

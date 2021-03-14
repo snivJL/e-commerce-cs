@@ -38,6 +38,11 @@ const orderReducer = (state = initialState, action) => {
         };
       else return state;
     }
+    case types.DELETE_FROM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter((p) => p.product._id !== payload),
+      };
     case types.SAVE_SHIPPING_ADDRESS:
       return { ...state, shippingAddress: payload };
     case types.SAVE_PAYMENT_METHOD:
@@ -46,6 +51,7 @@ const orderReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     case types.CREATE_ORDER_SUCCESS:
       return { ...state, loading: false };
+
     case types.CREATE_ORDER_FAIL:
       return { ...state, loading: false };
     default:

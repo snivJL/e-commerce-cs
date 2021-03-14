@@ -54,13 +54,24 @@ const AuthLinks = () => {
   return (
     <>
       {!loading && user.role === "admin" && <AdminLinks />}
-
-      <Nav.Link
+      <NavDropdown
+        className="navbar-nav-dropdown"
+        title="My Profile"
+        id="basic-nav-dropdown"
+      >
+        <NavDropdown.Item as={Link} to={`/user/${user._id}/myorders`}>
+          My Orders
+        </NavDropdown.Item>
+        <NavDropdown.Item onClick={() => dispatch(authActions.logout())}>
+          Log Out
+        </NavDropdown.Item>
+      </NavDropdown>
+      {/* <Nav.Link
         className="navbar-nav-link"
         onClick={() => dispatch(authActions.logout())}
       >
         Log Out
-      </Nav.Link>
+      </Nav.Link> */}
     </>
   );
 };

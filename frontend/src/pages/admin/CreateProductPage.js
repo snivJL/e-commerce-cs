@@ -148,7 +148,7 @@ const CreateProductPage = () => {
               ) : null}
             </Form.Group>
 
-            <Button type="submit" block>
+            <Button type="submit" className="btn btn-warning" block>
               Create
             </Button>
           </Form>

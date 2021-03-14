@@ -9,6 +9,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ShippingPage from "./pages/ShippingPage";
 import CreateProductPage from "./pages/admin/CreateProductPage";
+import MyOrdersPage from "./pages/MyOrdersPage";
 import ProductListPage from "./pages/admin/ProductListPage";
 import UserListPage from "./pages/admin/UserListPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="/admin/product/create" component={CreateProductPage} />
             <Route path="/admin/product/list" component={ProductListPage} />
             <Route path="/admin/user/list" component={UserListPage} />
+            <Route path="/user/:id/myorders" component={MyOrdersPage} />
             <Route path="/placeorder" component={PlaceOrderPage} />;
             <Route path="/product/:id" component={ProductPage} />;
             <Route path="/cart/:id?" component={CartPage} />;

@@ -59,6 +59,16 @@ userActions.topUpUser = (userId, topup) => async (dispatch) => {
     });
   }
 };
+userActions.getUserOrders = (userId) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_USER_ORDER_REQUEST });
+    const { data } = await api.get(`/user/${userId}/order`);
+    dispatch({ type: types.GET_USER_ORDER_SUCCESS, payload: data.data.orders });
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: types.GET_USER_ORDER_FAIL, error: error.errors.message });
+  }
+};
 
 userActions.selectUser = (user) => (dispatch) => {
   dispatch({ type: types.SELECT_USER, payload: user });

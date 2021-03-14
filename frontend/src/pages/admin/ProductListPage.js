@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/layout/Loader";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Row, ListGroup, Image, Col, Button } from "react-bootstrap";
 import productActions from "../../redux/actions/product.actions";
 import EditProductModal from "./EditProductModal";

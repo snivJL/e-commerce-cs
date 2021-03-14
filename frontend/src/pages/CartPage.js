@@ -9,6 +9,7 @@ import {
   Image,
   Card,
   Button,
+  ButtonGroup,
 } from "react-bootstrap";
 import orderActions from "../redux/actions/order.actions";
 
@@ -27,9 +28,9 @@ const CartPage = () => {
     isAuthenticated ? history.push("/shipping") : history.push("/login");
   };
   return (
-    <Row>
+    <Row className="pt-3">
       <Col md={8}>
-        <h1>Shopping Cart</h1>
+        <h2>Shopping Cart</h2>
         {cart.length === 0 ? (
           <Alert>
             Your cart is empty <Link to="/">Go Back</Link>
@@ -51,65 +52,82 @@ const CartPage = () => {
                     <Col md={3}>
                       <Link to={`/product${productId}`}>{p.product.name}</Link>
                     </Col>
-                    <Col md={3}>${p.product.price}</Col>
+                    <Col md={2}>${p.product.price}</Col>
+                    <Col>
+                      <ButtonGroup>
+                        <Button
+                          size="sm"
+                          variant="light"
+                          onClick={() =>
+                            dispatch(
+                              orderActions.removeFromCart(undefined, p.product)
+                            )
+                          }
+                          disabled={p.qty === 0}
+                        >
+                          -
+                        </Button>
+                        <Button size="md" variant="light" disabled>
+                          {p.qty}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="light"
+                          onClick={() =>
+                            dispatch(
+                              orderActions.addToCart(undefined, p.product)
+                            )
+                          }
+                        >
+                          +
+                        </Button>
+                      </ButtonGroup>
+                    </Col>
                     <Col>
                       <Button
+                        onClick={() =>
+                          dispatch(orderActions.deleteFromCart(p.product._id))
+                        }
                         size="sm"
                         variant="light"
-                        onClick={() =>
-                          dispatch(
-                            orderActions.removeFromCart(undefined, p.product)
-                          )
-                        }
-                        disabled={p.qty === 0}
                       >
-                        -
-                      </Button>
-                      {p.qty}
-                      <Button
-                        size="sm"
-                        variant="light"
-                        onClick={() =>
-                          dispatch(orderActions.addToCart(undefined, p.product))
-                        }
-                      >
-                        +
+                        <i className="fas fa-trash"></i>
                       </Button>
                     </Col>
                   </Row>
                 </ListGroup.Item>
               ))}
-              <Row>
-                <Col md={6}>
-                  <Card>
-                    <ListGroup variant="flush">
-                      <h3>
-                        Subtotal (
-                        {cart.reduce((acc, item) => item.qty + acc, 0)}) items
-                      </h3>
-                      $
-                      {cart.reduce(
-                        (acc, item) => acc + item.qty * item.product.price,
-                        0
-                      )}
-                    </ListGroup>
-                    <ListGroup.Item>
-                      <Button
-                        type="button"
-                        onClick={(e) => checkoutHandler(e)}
-                        className="btn-block "
-                        style={{ backgroundColor: "var(--primary)" }}
-                        disabled={cart.length === 0}
-                      >
-                        Proceed to Checkout
-                      </Button>
-                    </ListGroup.Item>
-                  </Card>
-                </Col>
-              </Row>
             </ListGroup>
           </>
         )}
+      </Col>
+      <Col md={4}>
+        <Card className="py-2 px-4 mt-5">
+          <ListGroup variant="flush">
+            <h4>
+              Subtotal ({cart.reduce((acc, item) => item.qty + acc, 0)}) items
+            </h4>
+            <div className="d-flex align-items-center px-3">
+              <p>$</p>
+              <h1>
+                {cart.reduce(
+                  (acc, item) => acc + item.qty * item.product.price,
+                  0
+                )}
+              </h1>
+            </div>
+          </ListGroup>
+          <ListGroup.Item>
+            <Button
+              type="button"
+              onClick={(e) => checkoutHandler(e)}
+              className="btn-block btn-warning"
+              disabled={cart.length === 0}
+            >
+              Proceed to Checkout
+            </Button>
+          </ListGroup.Item>
+        </Card>
       </Col>
     </Row>
   );
