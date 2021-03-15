@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Card,
-  Image,
-  ListGroup,
-  Button,
-  Form,
-} from "react-bootstrap";
+import { Row, Col, Card, ListGroup, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import productActions from "../redux/actions/product.actions";
 import Loader from "../components/layout/Loader";
-import orderActions from "../redux/actions/order.actions";
 import Rating from "../components/products/Rating";
 import ImagesCarousel from "../components/products/ImagesCarousel";
 import AddToCartButton from "../components/order/AddToCartButton";
@@ -31,10 +22,6 @@ const ProductPage = () => {
     dispatch(productActions.getSingleProduct(productId.id));
   }, [dispatch, productId]);
 
-  const addToCart = () => {
-    dispatch(orderActions.addToCart(qty, product));
-    // history.push(`/cart/${productId.id}?${qty}`);
-  };
   return (
     <>
       {loading ? (

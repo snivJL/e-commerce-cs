@@ -25,10 +25,11 @@ const EditProductModal = ({ product }) => {
       name,
       description,
       price,
-      images: images[0],
+      images,
     },
     validate,
     onSubmit: (values) => {
+      console.log("values", values);
       dispatch(productActions.editProduct(values));
     },
   });
@@ -124,15 +125,15 @@ const EditProductModal = ({ product }) => {
                   Remove
                 </Button>
 
-                {array.map((input, index) => (
+                {formik.values.images.map((input, index) => (
                   <Form.Group>
                     <Form.Control
                       type="text"
                       placeholder="http://..."
-                      name={`image${index + 1}`}
+                      name={`images[${index + 0}].imageUrl`}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      // value={formik.values.images}
+                      defaultValue={input.imageUrl}
                     />
                   </Form.Group>
                 ))}

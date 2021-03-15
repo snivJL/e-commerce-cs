@@ -34,7 +34,7 @@ const ProductListPage = () => {
                       />
                     </Col>
                     <Col md={3}>
-                      <Link to={`/product${p._id}`}>{p.name}</Link>
+                      <Link to={`/product/${p._id}`}>{p.name}</Link>
                     </Col>
                     <Col md={4}>{p.description}</Col>
                     <Col md={2}>${p.price}</Col>
