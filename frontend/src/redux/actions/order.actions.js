@@ -40,8 +40,11 @@ orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
     dispatch({ type: types.CREATE_ORDER_REQUEST });
     const { data } = await api.post("/order/add", formatOrder);
     dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: data });
+    toast.warning(`Thanks for ordering!`);
+    localStorage.removeItem("cartItems");
   } catch (error) {
     dispatch({ type: types.CREATE_ORDER_FAIL, payload: error.errors.message });
+    toast.error(error.errors.message);
   }
 };
 

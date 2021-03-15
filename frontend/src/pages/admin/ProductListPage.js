@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../components/layout/Loader";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Row, ListGroup, Image, Col, Button } from "react-bootstrap";
 import productActions from "../../redux/actions/product.actions";
 import EditProductModal from "./EditProductModal";
+import Searchbar from "../../components/layout/SearchBar";
 
 const ProductListPage = () => {
+  const keywords = useParams().keywords;
   const { products, loading } = useSelector((state) => state.product);
-  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(productActions.getAllProducts());
-  }, [dispatch]);
+    dispatch(productActions.getAllProducts(keywords));
+  }, [dispatch, keywords]);
   return (
     <Row>
       <Col md={12}>
         <h2>Product List</h2>
+        <Searchbar admin={true} />
         {loading ? (
           <Loader />
         ) : (

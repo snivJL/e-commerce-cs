@@ -45,6 +45,21 @@ userActions.getAllUsers = () => async (dispatch) => {
   }
 };
 
+userActions.makePayment = (userId, orderId) => async (dispatch) => {
+  try {
+    dispatch({ type: types.MAKE_PAYMENT_REQUEST });
+    const { data } = await api.put(`/user/${userId}/payment`, { orderId });
+    dispatch({ type: types.MAKE_PAYMENT_SUCCESS, payload: data.data.order });
+  } catch (error) {
+    console.error(error);
+    dispatch({
+      type: types.MAKE_PAYMENT_FAIL,
+      payload: error.errors.message,
+    });
+    toast.error(error.errors.message);
+  }
+};
+
 userActions.topUpUser = (userId, topup) => async (dispatch) => {
   try {
     dispatch({ type: types.TOPUP_USER_REQUEST });

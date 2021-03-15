@@ -5,7 +5,6 @@ import Rating from "./Rating";
 import AddToCartButton from "../../components/order/AddToCartButton";
 
 const Product = ({ product }) => {
-  console.log(product);
   return (
     <Card className="my-3 p3 rounded">
       <Link to={`/product/${product._id}`}>

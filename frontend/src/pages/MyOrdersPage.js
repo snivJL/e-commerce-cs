@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import userActions from "../redux/actions/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Row, Col, Table } from "react-bootstrap";
+import { Row, Col, Table, Button } from "react-bootstrap";
 import Loader from "../components/layout/Loader";
 
 const MyOrdersPage = () => {
@@ -18,15 +18,14 @@ const MyOrdersPage = () => {
         {loading ? (
           <Loader />
         ) : (
-          <Table>
+          <Table striped>
             <thead>
               <tr>
-                <th>Name</th>
+                <th>ID</th>
                 <th>Status</th>
-                <th>Price</th>
                 <th>Items</th>
+                <th>Total</th>
                 <th>Shipping</th>
-                <th>Payment Method</th>
               </tr>
             </thead>
             <tbody>
@@ -34,12 +33,34 @@ const MyOrdersPage = () => {
                 <tr>
                   <td>{o._id}</td>
                   <td>{o.status}</td>
+                  <td>
+                    {o.products.map((p) => (
+                      <tr>{p.name}</tr>
+                    ))}
+                  </td>
                   <td>{o.total}</td>
-                  <td>{o._id}</td>
 
-                  <td>{o._id}</td>
-
-                  <td>{o._id}</td>
+                  <td>
+                    <tr>{o.shipping.address}</tr>
+                    <tr>{o.shipping.city}</tr>
+                    <tr>{o.shipping.postalCode}</tr>
+                    <tr>{o.shipping.country}</tr>
+                  </td>
+                  <td>
+                    {o.status === "pending" && (
+                      <Button
+                        onClick={() =>
+                          dispatch(userActions.makePayment(userId, o._id))
+                        }
+                        style={{ backgroundColor: "#fd5c32", color: "white" }}
+                        className="rounded"
+                        size="sm"
+                        variant="light"
+                      >
+                        Pay Now
+                      </Button>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

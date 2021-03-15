@@ -40,7 +40,7 @@ const UserListPage = () => {
                   <th>Id</th>
                   <th>Name</th>
                   <th>Email</th>
-                  <th>Role</th>
+                  <th>Admin</th>
                   <th>Balance</th>
                 </tr>
               </thead>
@@ -50,7 +50,15 @@ const UserListPage = () => {
                     <td>{u._id}</td>
                     <td>{u.name}</td>
                     <td>{u.email}</td>
-                    <td>{u.role}</td>
+                    <td className="text-center">
+                      <i
+                        className={
+                          u.role === "admin"
+                            ? "fas fa-check fa-2x text-success"
+                            : "fas fa-times fa-2x text-danger"
+                        }
+                      ></i>
+                    </td>
                     <td className="d-flex justify-content-between">
                       {u.balance}
                       <Button

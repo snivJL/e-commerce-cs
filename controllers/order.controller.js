@@ -1,4 +1,4 @@
-const Product = require("../models/Product");
+const User = require("../models/User");
 const Order = require("../models/Order");
 const utilsHelper = require("../helpers/utils.helper");
 
@@ -16,10 +16,36 @@ orderController.createOrder = async (req, res, next) => {
     validator.checkObjectId(userId);
     products.map((p) => validator.checkObjectId(p));
 
+    // const user = await User.findById(userId);
+    // console.log(user);
+    // if (user.balance >= total) {
+    //   const order = await Order.create({
+    //     userId,
+    //     products,
+    //     status,
+    //     shipping,
+    //     total,
+    //   });
+    //   const user = await User.findByIdAndUpdate(
+    //     { _id: userId },
+    //     { $inc: { balance: -total } },
+    //     { new: true }
+    //   );
+    //   utilsHelper.sendResponse(
+    //     res,
+    //     200,
+    //     true,
+    //     { order },
+    //     null,
+    //     "Order created"
+    //   );
+    // } else {
+    //   return next(new Error("401 - Insufficient balance, please top up"));
+    // }
+
     const order = await Order.create({
       userId,
       products,
-      status,
       shipping,
       total,
     });

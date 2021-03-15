@@ -35,6 +35,9 @@ const App = () => {
             <Route path="/user/:id/myorders" component={MyOrdersPage} />
             <Route path="/placeorder" component={PlaceOrderPage} />;
             <Route path="/product/:id" component={ProductPage} />;
+            <Route path="/search/:keywords" component={HomePage} />;
+            <Route path="/admin/search/:keywords" component={ProductListPage} />
+            ;
             <Route path="/cart/:id?" component={CartPage} />;
           </Switch>
         </Container>

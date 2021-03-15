@@ -100,30 +100,34 @@ userController.makePayment = async (req, res, next) => {
   if (!orderId) return next(new Error("401 - product not found in body"));
 
   try {
-    const price = await Order.findByIdAndUpdate({ _id: orderId }).select(
-      "total"
-    );
-    const user = await User.findByIdAndUpdate(
-      { _id: userId },
-      { $inc: { balance: -price.total } },
-      { new: true }
-    );
+    const price = await Order.findById({ _id: orderId });
 
+    const user = await User.findById({ _id: userId });
     if (!user) return next(new Error("401 - User not found"));
+    console.log("HERE", price);
+    if (user.balance >= price.total) {
+      const user = await User.findByIdAndUpdate(
+        { _id: userId },
+        { $inc: { balance: -price.total } },
+        { new: true }
+      );
 
-    const product = await Order.findByIdAndUpdate(
-      { _id: orderId },
-      { status: "paid" },
-      { new: true }
-    );
-    utilsHelper.sendResponse(
-      res,
-      200,
-      true,
-      { user, product },
-      null,
-      "User balance updated"
-    );
+      const order = await Order.findByIdAndUpdate(
+        { _id: orderId },
+        { status: "paid" },
+        { new: true }
+      );
+      utilsHelper.sendResponse(
+        res,
+        200,
+        true,
+        { user, order },
+        null,
+        "User balance updated"
+      );
+    } else {
+      return next(new Error("401 - Insufficient balance, please top up"));
+    }
   } catch (error) {
     next(error);
   }

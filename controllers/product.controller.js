@@ -9,8 +9,8 @@ let productController = {};
 
 productController.getAllProducts = async (req, res, next) => {
   try {
-    let { page, limit, sortBy, ...filter } = req.query;
-
+    let { page, limit, sortBy, search, ...filter } = req.query;
+    const keywords = search ? { name: { $regex: search, $options: "i" } } : {};
     page = parseInt(page) || 1;
     limit = parseInt(limit) || 10;
 
@@ -26,7 +26,9 @@ productController.getAllProducts = async (req, res, next) => {
     const offset = limit * (page - 1);
     console.log("offset", offset);
 
-    const products = await Product.find({}).skip(offset).limit(limit);
+    const products = await Product.find({ ...keywords })
+      .skip(offset)
+      .limit(limit);
 
     utilsHelper.sendResponse(
       res,
@@ -73,7 +75,6 @@ productController.createProduct = async (req, res, next) => {
 productController.updateProduct = async (req, res, next) => {
   const { name, description, price, images } = req.body;
   const productId = req.params.id;
-  console.log("UPDATE CONTROLLER", req.body);
   let fields = {};
 
   if (name) fields.name = name;

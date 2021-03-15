@@ -4,11 +4,10 @@ import { toast } from "react-toastify";
 
 const productActions = {};
 
-productActions.getAllProducts = () => async (dispatch) => {
+productActions.getAllProducts = (keywords = "") => async (dispatch) => {
   try {
     dispatch({ type: types.GET_PRODUCTS_REQUEST });
-    const { data } = await api.get("/product");
-    console.log("DATA", data);
+    const { data } = await api.get(`/product?search=${keywords}`);
     dispatch({
       type: types.GET_PRODUCTS_SUCCESS,
       payload: data.data.products,
@@ -37,7 +36,6 @@ productActions.getSingleProduct = (id) => async (dispatch) => {
 };
 
 productActions.createProduct = (product) => async (dispatch) => {
-  console.log("product action", product);
   //temporary fix
   const image = { imageUrl: product.image1 };
   product.images = [...product.images, image];
@@ -71,7 +69,6 @@ productActions.deleteProduct = (productId) => async (dispatch) => {
 };
 
 productActions.editProduct = (product) => async (dispatch) => {
-  console.log("EDIT", product);
   try {
     dispatch({ type: types.EDIT_PRODUCT_REQUEST });
     const { data } = await api.put(`/product/${product._id}/update`, product);
