@@ -64,4 +64,26 @@ router.delete(
   productController.deleteProduct
 );
 
+/**
+ * @route GET api/product/deleted?page=1&limit=10
+ * @description Admin can see list of deleted products
+ * @access Admin
+ */
+router.get(
+  "/admin/deleted",
+
+  productController.getDeletedProducts
+);
+
+/**
+ * @route PUT api/product/:id/restore
+ * @description Admin can restore product
+ * @access Admin required
+ */
+router.put(
+  "/:id/restore",
+  authMiddleware.loginRequired,
+  authMiddleware.adminRequired,
+  productController.restoreProduct
+);
 module.exports = router;

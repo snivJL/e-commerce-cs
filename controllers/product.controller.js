@@ -1,5 +1,4 @@
 const Product = require("../models/Product");
-
 const utilsHelper = require("../helpers/utils.helper");
 
 const { validationResult, check } = require("express-validator");
@@ -26,7 +25,7 @@ productController.getAllProducts = async (req, res, next) => {
     const offset = limit * (page - 1);
     console.log("offset", offset);
 
-    const products = await Product.find({ ...keywords })
+    const products = await Product.find({ isDeleted: false, ...keywords })
       .skip(offset)
       .limit(limit);
 
@@ -108,6 +107,58 @@ productController.deleteProduct = async (req, res, next) => {
       return next(new Error("Product not found"));
     }
     utilsHelper.sendResponse(res, 200, true, product, null, "Product deleted");
+  } catch (error) {
+    next(error);
+  }
+};
+
+productController.getDeletedProducts = async (req, res, next) => {
+  try {
+    let { page, limit, sortBy, search, ...filter } = req.query;
+    page = parseInt(page) || 1;
+    limit = parseInt(limit) || 10;
+
+    const totalProducts = await Product.countDocuments({
+      ...filter,
+      isDeleted: true,
+    });
+    console.log("totalproducts", totalProducts);
+
+    const totalPages = Math.ceil(totalProducts / limit);
+    console.log("totalpages", totalPages);
+
+    const offset = limit * (page - 1);
+    console.log("offset", offset);
+
+    const products = await Product.find({ isDeleted: true })
+      .skip(offset)
+      .limit(limit);
+
+    utilsHelper.sendResponse(
+      res,
+      200,
+      true,
+      { products },
+      null,
+      "List of deleted products"
+    );
+  } catch (error) {
+    next(error);
+  }
+};
+
+productController.restoreProduct = async (req, res, next) => {
+  const productId = req.params.id;
+
+  try {
+    const product = await Product.findByIdAndUpdate(
+      { _id: productId },
+      { isDeleted: false }
+    );
+    if (!product) {
+      return next(new Error("Product not found"));
+    }
+    utilsHelper.sendResponse(res, 200, true, product, null, "Product restored");
   } catch (error) {
     next(error);
   }

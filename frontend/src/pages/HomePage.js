@@ -5,6 +5,7 @@ import Loader from "../components/layout/Loader";
 import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Product from "../components/products/Product";
+import TopProductsCarousel from "../components/products/TopProductsCarousel";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,14 @@ const HomePage = () => {
         {loading ? (
           <Loader />
         ) : (
-          products.map((p) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
-              <Product product={p} />
-            </Col>
-          ))
+          <>
+            <TopProductsCarousel products={products} />
+            {products.map((p) => (
+              <Col sm={12} md={6} lg={4} xl={3}>
+                <Product product={p} />
+              </Col>
+            ))}
+          </>
         )}
       </Row>
     </>

@@ -9,15 +9,20 @@ import Searchbar from "../../components/layout/SearchBar";
 
 const ProductListPage = () => {
   const keywords = useParams().keywords;
-  const { products, loading } = useSelector((state) => state.product);
+  const { products, loading, deletedProducts } = useSelector(
+    (state) => state.product
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productActions.getAllProducts(keywords));
   }, [dispatch, keywords]);
+  useEffect(() => {
+    dispatch(productActions.getDeletedProducts());
+  }, [dispatch]);
   return (
     <Row>
       <Col md={12}>
-        <h2>Product List</h2>
+        <h2>Active Product List</h2>
         <Searchbar admin={true} />
         {loading ? (
           <Loader />
@@ -50,6 +55,40 @@ const ProductListPage = () => {
                         size="sm"
                       >
                         <i className="fas fa-trash"></i>
+                      </Button>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+            <h2>Deleted Products</h2>
+            <ListGroup variant="flush">
+              {deletedProducts.map((p) => (
+                <ListGroup.Item key={p._id}>
+                  <Row className="align-items-center">
+                    <Col md={1}>
+                      <Image
+                        src={p.images[0].imageUrl}
+                        alt={p.name}
+                        fluid
+                        rounded
+                      />
+                    </Col>
+                    <Col md={3}>
+                      <Link to={`/product/${p._id}`}>{p.name}</Link>
+                    </Col>
+                    <Col md={4}>{p.description}</Col>
+                    <Col md={2}>${p.price}</Col>
+                    <Col>
+                      <EditProductModal product={p} />
+                      <Button
+                        onClick={() =>
+                          dispatch(productActions.restoreProduct(p._id))
+                        }
+                        variant="light"
+                        size="sm"
+                      >
+                        <i class="fas fa-trash-restore"></i>
                       </Button>
                     </Col>
                   </Row>

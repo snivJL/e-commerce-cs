@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import Loader from "../components/layout/Loader";
+import EditOrderModal from "../components/order/EditOrderModal";
 
 const MyOrdersPage = () => {
   const userId = useParams().id;
@@ -18,7 +19,7 @@ const MyOrdersPage = () => {
         {loading ? (
           <Loader />
         ) : (
-          <Table striped>
+          <Table className="table-hover">
             <thead>
               <tr>
                 <th>ID</th>
@@ -32,7 +33,13 @@ const MyOrdersPage = () => {
               {myOrders.map((o) => (
                 <tr>
                   <td>{o._id}</td>
-                  <td>{o.status}</td>
+                  <td
+                    className={`${
+                      o.status === "pending" ? "text-danger" : "text-success"
+                    } font-weight-bold text-capitalize`}
+                  >
+                    {o.status}
+                  </td>
                   <td>
                     {o.products.map((p) => (
                       <tr>{p.name}</tr>
@@ -46,20 +53,21 @@ const MyOrdersPage = () => {
                     <tr>{o.shipping.postalCode}</tr>
                     <tr>{o.shipping.country}</tr>
                   </td>
-                  <td>
+                  <td className="d-flex flex-column align-items-center">
                     {o.status === "pending" && (
                       <Button
                         onClick={() =>
                           dispatch(userActions.makePayment(userId, o._id))
                         }
                         style={{ backgroundColor: "#fd5c32", color: "white" }}
-                        className="rounded"
+                        className="rounded btn btn-block"
                         size="sm"
                         variant="light"
                       >
                         Pay Now
                       </Button>
                     )}
+                    <EditOrderModal order={o} />
                   </td>
                 </tr>
               ))}

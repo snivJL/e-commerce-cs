@@ -6,7 +6,6 @@ const orderActions = {};
 orderActions.addToCart = (qty = 1, product) => (dispatch, getState) => {
   dispatch({ type: types.ADD_TO_CART, payload: { product, qty } });
   localStorage.setItem("cartItems", JSON.stringify(getState().order.cart));
-  toast.success("Added to cart!");
 };
 
 orderActions.removeFromCart = (qty = 1, product) => (dispatch, getState) => {
@@ -31,12 +30,20 @@ orderActions.savePaymentMethod = (data) => (dispatch) => {
 
 orderActions.createOrder = (order, cartPrice) => async (dispatch) => {
   try {
+    //creates flattened array, 1 line per product per quantity to match server
+    const productsArray = order.cart
+      .map((p) => {
+        if (p.qty > 1) {
+          return new Array(p.qty).fill(p.product._id, 0, p.qty);
+        } else return p.product._id;
+      })
+      .flat();
+
     const formatOrder = {};
-    formatOrder.products = order.cart.map((p) => p.product._id);
+    formatOrder.products = productsArray;
     formatOrder.shipping = order.shippingAddress;
     formatOrder.status = "paid";
     formatOrder.total = cartPrice;
-    console.log(order, "format", formatOrder);
     dispatch({ type: types.CREATE_ORDER_REQUEST });
     const { data } = await api.post("/order/add", formatOrder);
     dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: data });

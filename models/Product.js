@@ -10,7 +10,6 @@ const productSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-productSchema.plugin(require("./plugins/isDeletedFalse"));
 
 const Product = mongoose.model("Product", productSchema);
 

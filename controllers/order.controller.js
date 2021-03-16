@@ -59,9 +59,9 @@ orderController.createOrder = async (req, res, next) => {
 orderController.updateOrder = async (req, res, next) => {
   try {
     const orderId = req.params.id;
-    const { userId, products, status, total } = req.body;
+    const { userId, products, status, total, shipping } = req.body;
     let fields = {};
-    if (userId) fields.userId = userId;
+    if (shipping) fields.shipping = shipping;
     if (products) fields.products = products;
     if (status) fields.status = status;
     if (total) fields.total = total;
