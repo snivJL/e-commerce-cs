@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col, Table, Button } from "react-bootstrap";
 import Loader from "../components/layout/Loader";
 import EditOrderModal from "../components/order/EditOrderModal";
+import Moment from "react-moment";
 
 const MyOrdersPage = () => {
   const userId = useParams().id;
@@ -22,7 +23,7 @@ const MyOrdersPage = () => {
           <Table className="table-hover">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>Date</th>
                 <th>Status</th>
                 <th>Items</th>
                 <th>Total</th>
@@ -32,11 +33,13 @@ const MyOrdersPage = () => {
             <tbody>
               {myOrders.map((o) => (
                 <tr>
-                  <td>{o._id}</td>
+                  <td>
+                    <Moment format="DD-MM-YYYY">{o.createdAt}</Moment>
+                  </td>
                   <td
                     className={`${
                       o.status === "pending" ? "text-danger" : "text-success"
-                    } font-weight-bold text-capitalize`}
+                    } font-weight-bold text-capitalize h4`}
                   >
                     {o.status}
                   </td>

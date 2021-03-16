@@ -47,7 +47,8 @@ userController.getUserOrders = async (req, res, next) => {
     const userId = req.userId;
     const orders = await Order.find({ userId })
       .populate("userId")
-      .populate("products");
+      .populate("products")
+      .sort({ createdAt: -1 });
 
     utilsHelper.sendResponse(res, 200, true, { orders }, null, "Current user");
   } catch (error) {
