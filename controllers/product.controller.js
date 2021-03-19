@@ -62,6 +62,7 @@ productController.getSingleProduct = async (req, res, next) => {
   }
 };
 productController.createProduct = async (req, res, next) => {
+  console.log("CONTROLLER", req.body);
   try {
     const { name, description, price, images } = req.body;
     const product = await Product.create({ name, description, price, images });

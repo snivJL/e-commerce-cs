@@ -37,8 +37,10 @@ productActions.getSingleProduct = (id) => async (dispatch) => {
 
 productActions.createProduct = (product) => async (dispatch) => {
   //temporary fix
-  const image = { imageUrl: product.image1 };
-  product.images = [...product.images, image];
+  // const image = { imageUrl: product.image1 };
+  // product.images = [...product.images, image];
+  console.log("ACTION", product);
+  product.images.shift();
   try {
     dispatch({ type: types.CREATE_PRODUCT_REQUEST });
     const { data } = await api.post("/product/add", product);

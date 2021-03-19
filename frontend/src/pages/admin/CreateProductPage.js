@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row, Col, Image } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import productActions from "../../redux/actions/product.actions";
 
 const CreateProductPage = () => {
-  const [inputs, setInputs] = useState(1);
-  const [array, setArray] = useState(["image"]);
+  const [images, setImages] = useState([{}]);
   const dispatch = useDispatch();
+  const widget = window.cloudinary.createUploadWidget(
+    { cloudName: "dilv93gvb", uploadPreset: "coderShop" },
+    (error, result) => {
+      // console.log(result);
+      if (result.event && result.event === "success")
+        setImages((images) => [
+          ...images,
+          { imageUrl: result.info.secure_url },
+        ]);
+      console.log(result);
+    }
+  );
   const validate = (values) => {
     const errors = {};
     if (!values.name) {
@@ -39,23 +50,11 @@ const CreateProductPage = () => {
     validate,
     onSubmit: (values) => {
       console.log(values);
+      values.images = images;
       dispatch(productActions.createProduct(values));
     },
   });
-  const handleInputs = (e) => {
-    e.preventDefault();
-    if (e.target.name === "add") {
-      setInputs((inputs) => inputs + 1);
-      setArray([...array, `image${inputs + 1}`]);
-    } else {
-      setInputs((inputs) => inputs - 1);
-      array.splice(-1, 1);
-      setArray(array);
-    }
-  };
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
+
   return (
     <Container>
       <Row className="justify-content-center ">
@@ -107,45 +106,24 @@ const CreateProductPage = () => {
                 <div>{formik.errors.price}</div>
               ) : null}
             </Form.Group>
+
             <Form.Group>
-              <Form.Label>Image Links</Form.Label>
+              {images.length > 0 &&
+                images.map((i) => (
+                  <Image
+                    key={i}
+                    style={{ width: "120px" }}
+                    thumbnail
+                    src={i.imageUrl}
+                  ></Image>
+                ))}
               <Button
-                onClick={(e) => handleInputs(e)}
-                className="ml-2"
-                variant="light"
-                size="sm"
-                name="add"
+                block
+                className="btn btn-primary"
+                onClick={() => widget.open()}
               >
-                Add
+                Upload images
               </Button>
-
-              <Button
-                onClick={(e) => handleInputs(e)}
-                className="ml-2"
-                variant="light"
-                size="sm"
-                name="remove"
-                disabled={inputs <= 1}
-              >
-                Remove
-              </Button>
-
-              {array.map((input, index) => (
-                <Form.Group>
-                  <Form.Control
-                    type="text"
-                    placeholder="http://..."
-                    name={`image${index + 1}`}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    // value={formik.values.images}
-                  />
-                </Form.Group>
-              ))}
-
-              {formik.touched.images && formik.errors.images ? (
-                <div>{formik.errors.images}</div>
-              ) : null}
             </Form.Group>
 
             <Button type="submit" className="btn btn-warning" block>
