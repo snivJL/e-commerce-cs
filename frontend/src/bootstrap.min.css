@@ -163,7 +163,7 @@ a {
   background-color: transparent;
 }
 a:hover {
-  color: #000;
+  color: #fd5c32;
   text-decoration: underline;
 }
 a:not([href]):not([class]) {
@@ -2441,14 +2441,14 @@ fieldset:disabled a.btn {
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #070707;
-  border-color: #010101;
+  background-color: #fd5c32;
+  border-color: #fd5c32;
 }
 .btn-primary.focus,
 .btn-primary:focus {
   color: #fff;
-  background-color: #070707;
-  border-color: #010101;
+  background-color: #fd5c32;
+  border-color: #fd5c32;
   box-shadow: 0 0 0 0.2rem rgba(60, 60, 60, 0.5);
 }
 .btn-primary.disabled,
@@ -2461,8 +2461,8 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #010101;
-  border-color: #000;
+  background-color: #fd5c32;
+  border-color: #fd5c32;
 }
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
@@ -2960,7 +2960,7 @@ fieldset:disabled a.btn {
   text-decoration: none;
 }
 .btn-link:hover {
-  color: #000;
+  color: #fd5c32;
   text-decoration: underline;
 }
 .btn-link.focus,
@@ -4581,7 +4581,7 @@ input[type="submit"].btn-block {
 }
 .page-link:hover {
   z-index: 2;
-  color: #000;
+  color: #fd5c32;
   text-decoration: none;
   background-color: #f7f7f9;
   border-color: transparent;
@@ -4656,7 +4656,7 @@ a.badge:hover {
 a.badge-primary:focus,
 a.badge-primary:hover {
   color: #fff;
-  background-color: #010101;
+  background-color: #fd5c32;
 }
 a.badge-primary.focus,
 a.badge-primary:focus {
@@ -4807,7 +4807,7 @@ a.badge-dark:focus {
   border-top-color: #b2b2b2;
 }
 .alert-primary .alert-link {
-  color: #000;
+  color: #fd5c32;
 }
 .alert-secondary {
   color: #858585;
@@ -5219,12 +5219,12 @@ a.badge-dark:focus {
   font-size: 1.3125rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
+  color: #fd5c32;
   text-shadow: 0 1px 0 #fff;
   opacity: 0.5;
 }
 .close:hover {
-  color: #000;
+  color: #fd5c32;
   text-decoration: none;
 }
 .close:not(:disabled):not(.disabled):focus,
@@ -5386,7 +5386,7 @@ a.close.disabled {
   z-index: 1040;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
+  background-color: #fd5c32;
 }
 .modal-backdrop.fade {
   opacity: 0;
@@ -5527,7 +5527,7 @@ a.close.disabled {
 .bs-tooltip-top .arrow::before {
   top: 0;
   border-width: 0.4rem 0.4rem 0;
-  border-top-color: #000;
+  border-top-color: #fd5c32;
 }
 .bs-tooltip-auto[x-placement^="right"],
 .bs-tooltip-right {
@@ -5543,7 +5543,7 @@ a.close.disabled {
 .bs-tooltip-right .arrow::before {
   right: 0;
   border-width: 0.4rem 0.4rem 0.4rem 0;
-  border-right-color: #000;
+  border-right-color: #fd5c32;
 }
 .bs-tooltip-auto[x-placement^="bottom"],
 .bs-tooltip-bottom {
@@ -5557,7 +5557,7 @@ a.close.disabled {
 .bs-tooltip-bottom .arrow::before {
   bottom: 0;
   border-width: 0 0.4rem 0.4rem;
-  border-bottom-color: #000;
+  border-bottom-color: #fd5c32;
 }
 .bs-tooltip-auto[x-placement^="left"],
 .bs-tooltip-left {
@@ -5573,14 +5573,14 @@ a.close.disabled {
 .bs-tooltip-left .arrow::before {
   left: 0;
   border-width: 0.4rem 0 0.4rem 0.4rem;
-  border-left-color: #000;
+  border-left-color: #fd5c32;
 }
 .tooltip-inner {
   max-width: 200px;
   padding: 0.25rem 0.5rem;
   color: #fff;
   text-align: center;
-  background-color: #000;
+  background-color: #fd5c32;
 }
 .popover {
   position: absolute;
@@ -6011,7 +6011,7 @@ a.bg-primary:focus,
 a.bg-primary:hover,
 button.bg-primary:focus,
 button.bg-primary:hover {
-  background-color: #010101 !important;
+  background-color: #fd5c32 !important;
 }
 .bg-secondary {
   background-color: #fff !important;
@@ -9115,7 +9115,7 @@ button.bg-dark:hover {
 }
 a.text-primary:focus,
 a.text-primary:hover {
-  color: #000 !important;
+  color: #fd5c32 !important;
 }
 .text-secondary {
   color: #fff !important;
@@ -9252,7 +9252,7 @@ a.text-dark:hover {
     display: none;
   }
   .badge {
-    border: 1px solid #000;
+    border: 1px solid #fd5c32;
   }
   .table {
     border-collapse: collapse !important;

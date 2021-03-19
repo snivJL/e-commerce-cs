@@ -7,8 +7,9 @@ const AlertMsg = () => {
     <ToastContainer
       pauseOnHover
       newestOnTop={false}
-      position="top-right"
+      position="bottom-center"
       hideProgressBar={false}
+      autoClose={1500}
     />
   );
 };

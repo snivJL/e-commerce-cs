@@ -36,7 +36,6 @@ const ProductPage = () => {
           </Link>
           <Row>
             <Col md={6}>
-              {/* <Image fluid src={image}></Image> */}
               <ImagesCarousel images={images} />
             </Col>
             <Col md={3}>
@@ -49,7 +48,7 @@ const ProductPage = () => {
                   Description: {product.description}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <Rating value={Math.random() * 5} />
+                  <Rating value={product.rating} />
                 </ListGroup.Item>
               </ListGroup>
             </Col>

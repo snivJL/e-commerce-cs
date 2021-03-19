@@ -18,7 +18,7 @@ authMiddleware.loginRequired = async (req, res, next) => {
     jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
       if (err) {
         if (err.name === "TokenExpiredError")
-          return next(new mongoose.Error("401 - Token exired"));
+          return next(new mongoose.Error("401 - Token expired"));
         else if (err.name === "TokenExpiredError")
           return next(new Error("401 - Token is invalid"));
       }

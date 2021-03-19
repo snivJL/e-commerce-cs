@@ -23,7 +23,7 @@ const CreateProductPage = () => {
     if (!values.images) {
       errors.images = "Required";
     } else if (
-      !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.test(
+      !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g.test(
         values.images[0]
       )
     )

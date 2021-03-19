@@ -6,22 +6,26 @@ import AddToCartButton from "../../components/order/AddToCartButton";
 
 const Product = ({ product }) => {
   return (
-    <Card className="my-3 p3 rounded">
+    <Card className="my-3 p3 rounded homepage-card">
       <Link to={`/product/${product._id}`}>
         <Card.Img
           src={product.images[0].imageUrl}
-          style={{ minHeight: "124px" }}
+          // style={{ minHeight: "124px" }}
           variant="top"
         ></Card.Img>
       </Link>
-      <Card.Body>
+      <Card.Body className="d-flex flex-column align-items-center w-100">
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div">
-            <strong>{product.name}</strong>
+            <strong>
+              {product.name.length > 24
+                ? product.name.slice(0, 24) + "..."
+                : product.name}
+            </strong>
           </Card.Title>
         </Link>
         <Card.Text as="h3">${product.price}</Card.Text>
-        <Rating value={Math.random() * 5} />
+        <Rating value={product.rating} />
         <AddToCartButton product={product} />
       </Card.Body>
     </Card>

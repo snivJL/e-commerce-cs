@@ -21,9 +21,9 @@ const HomePage = () => {
           <Loader />
         ) : (
           <>
-            <TopProductsCarousel products={products} />
-            {products.map((p) => (
-              <Col sm={12} md={6} lg={4} xl={3}>
+            {!keywords && <TopProductsCarousel products={products} />}
+            {products.map((p, index) => (
+              <Col key={index} sm={12} md={6} lg={4} xl={3}>
                 <Product product={p} />
               </Col>
             ))}

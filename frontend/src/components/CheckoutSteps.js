@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
     <Nav className="justify-content-center">
-      <Nav.Item>
+      <Nav.Item className={step1 && !step2 && "nav-link-underline"}>
         {step1 ? (
           <Nav.Link as={Link} to="login">
             Sign In
@@ -14,7 +14,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
           <Nav.Link disabled>Sign In</Nav.Link>
         )}
       </Nav.Item>
-      <Nav.Item>
+      <Nav.Item className={step2 && !step3 && "nav-link-underline"}>
         {step2 ? (
           <Nav.Link as={Link} to="/shipping">
             Shipping
@@ -23,7 +23,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
           <Nav.Link disabled>Shipping</Nav.Link>
         )}
       </Nav.Item>
-      <Nav.Item>
+      <Nav.Item className={step3 && !step4 && "nav-link-underline"}>
         {step3 ? (
           <Nav.Link as={Link} to="/payment">
             Payment
@@ -32,7 +32,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
           <Nav.Link disabled>Payment</Nav.Link>
         )}
       </Nav.Item>
-      <Nav.Item>
+      <Nav.Item className={step4 && "nav-link-underline"}>
         {step4 ? (
           <Nav.Link as={Link} to="placeorder">
             Place Order

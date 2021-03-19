@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import orderActions from "../../redux/actions/order.actions";
 
 const AddToCartButton = ({ qty = 1, product }) => {

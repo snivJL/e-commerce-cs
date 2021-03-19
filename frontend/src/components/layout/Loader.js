@@ -11,7 +11,7 @@ const override = css`
 
 function App() {
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <div className="d-flex justify-self-center align-self-center">
       <BeatLoader color="#fd5c32" css={override} size={30} />
     </div>
   );

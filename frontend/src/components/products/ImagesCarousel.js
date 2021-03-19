@@ -10,11 +10,11 @@ const ImagesCarousel = ({ images }) => {
   };
   return (
     <Row>
-      <Col md={12}>
+      <Col md={{ span: 8, offset: 2 }}>
         <RBCarousel
           className="carousel-fade"
           animation={true}
-          autoplay={false}
+          autoplay={true}
           slideshowSpeed={2000}
           defaultActiveIndex={0}
           leftIcon="<"

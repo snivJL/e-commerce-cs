@@ -82,7 +82,6 @@ orderController.updateOrder = async (req, res, next) => {
 orderController.deleteOrder = async (req, res, next) => {
   try {
     const orderId = req.params.id;
-    const { userId, products, status, total } = req.body;
 
     const order = await Order.findByIdAndUpdate(
       { _id: orderId },

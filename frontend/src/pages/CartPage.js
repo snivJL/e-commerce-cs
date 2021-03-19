@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation, Link, useHistory } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import {
   Row,
   Col,
@@ -16,8 +16,8 @@ import orderActions from "../redux/actions/order.actions";
 const CartPage = () => {
   const productId = useParams();
   // const qty = useLocation().search.split("?")[1] || 1;
-  const [qty, setQty] = useState(0);
-  const fakeStock = [1, 2, 3, 4, 5, 6, 7, 8];
+  // const [qty, setQty] = useState(0);
+  // const fakeStock = [1, 2, 3, 4, 5, 6, 7, 8];
   const history = useHistory();
   const cart = useSelector((state) => state.order.cart);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);

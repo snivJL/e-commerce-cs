@@ -45,7 +45,7 @@ userController.getCurrentUser = async (req, res, next) => {
 userController.getUserOrders = async (req, res, next) => {
   try {
     const userId = req.userId;
-    const orders = await Order.find({ userId })
+    const orders = await Order.find({ userId, isDeleted: false })
       .populate("userId")
       .populate("products")
       .sort({ createdAt: -1 });

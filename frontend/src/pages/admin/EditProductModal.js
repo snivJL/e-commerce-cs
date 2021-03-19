@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Container, Row, Col, Modal } from "react-bootstrap";
+import { Form, Button, Row, Col, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import productActions from "../../redux/actions/product.actions";

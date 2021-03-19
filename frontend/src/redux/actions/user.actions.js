@@ -28,6 +28,10 @@ userActions.getCurrentUser = () => async (dispatch) => {
       type: types.GET_CURRENT_USER_FAIL,
       payload: error.errors.message,
     });
+    if (error.errors.message === "Token expired") {
+      localStorage.removeItem("token");
+      toast.error("Token expired, please log in again");
+    }
   }
 };
 
@@ -85,6 +89,17 @@ userActions.getUserOrders = (userId) => async (dispatch) => {
   }
 };
 
+userActions.cancelOrder = (orderId) => async (dispatch) => {
+  try {
+    dispatch({ type: types.DELETE_ORDER_REQUEST });
+    await api.delete(`/order/${orderId}/delete`);
+    dispatch({ type: types.DELETE_ORDER_SUCCESS, payload: orderId });
+    toast.dark("Order canceled!");
+  } catch (error) {
+    console.error(error);
+    dispatch({ type: types.DELETE_ORDER_FAIL, payload: error.errors.message });
+  }
+};
 userActions.selectUser = (user) => (dispatch) => {
   dispatch({ type: types.SELECT_USER, payload: user });
 };

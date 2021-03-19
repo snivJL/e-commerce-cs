@@ -16,6 +16,7 @@ const userReducer = (state = initialState, action) => {
     case types.GET_USER_ORDER_REQUEST:
     case types.MAKE_PAYMENT_REQUEST:
     case types.TOPUP_USER_REQUEST:
+    case types.DELETE_ORDER_REQUEST:
       return { ...state, loading: true };
     case types.CREATE_USER_SUCCESS:
     case types.GET_CURRENT_USER_SUCCESS:
@@ -26,6 +27,13 @@ const userReducer = (state = initialState, action) => {
       return { ...state, users: payload, loading: false };
     case types.GET_USER_ORDER_SUCCESS:
       return { ...state, myOrders: payload, loading: false };
+    case types.DELETE_ORDER_SUCCESS:
+      return {
+        ...state,
+        myOrders: state.myOrders.filter((o) => o._id !== payload),
+        loading: false,
+      };
+
     case types.TOPUP_USER_SUCCESS:
       return {
         ...state,
@@ -44,6 +52,7 @@ const userReducer = (state = initialState, action) => {
     case types.CREATE_USER_FAIL:
     case types.GET_CURRENT_USER_FAIL:
     case types.GET_USER_ORDER_FAIL:
+    case types.DELETE_ORDER_FAIL:
     case types.GET_USERS_FAIL:
     case types.MAKE_PAYMENT_FAIL:
     case types.TOPUP_USER_FAIL:

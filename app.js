@@ -1,7 +1,8 @@
 const express = require("express");
 require("dotenv").config();
-
 const passport = require("passport");
+const generateData = require("./generateData.js");
+
 require("./middlewares/passport");
 
 const path = require("path");
@@ -13,7 +14,6 @@ const indexRouter = require("./routes/index");
 const utilsHelper = require("./helpers/utils.helper");
 
 const app = express();
-
 app.use(passport.initialize());
 app.use(logger("dev"));
 app.use(express.json());
@@ -23,6 +23,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const mongoose = require("mongoose");
+const { compare } = require("bcryptjs");
 const mongoURI = process.env.MONGODB_URI;
 
 /* DB Connections */

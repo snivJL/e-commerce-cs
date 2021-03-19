@@ -15,6 +15,7 @@ productController.getAllProducts = async (req, res, next) => {
 
     const totalProducts = await Product.countDocuments({
       ...filter,
+      ...keywords,
       isDeleted: false,
     });
     console.log("totalproducts", totalProducts);
@@ -33,7 +34,7 @@ productController.getAllProducts = async (req, res, next) => {
       res,
       200,
       true,
-      { products },
+      { products, page, totalPages },
       null,
       "List of products"
     );

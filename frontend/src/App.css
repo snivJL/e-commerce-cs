@@ -1,6 +1,7 @@
 :root {
   --main-color: #fd5c32;
   --background-color: #f5f5f5;
+  --main-color-faded: rgba(253, 92, 50, 0.5);
 }
 main {
   min-width: 100vw;
@@ -25,7 +26,7 @@ main {
   outline: none;
   border: none;
 }
-.icon-searchbar {
+.fa-search {
   position: absolute;
   top: 50%;
   right: 10px;
@@ -99,4 +100,39 @@ main {
 }
 .bg-primary:hover {
   background-color: #cb5c0d !important;
+}
+
+.carousel-caption {
+  background-color: var(--main-color-faded);
+  max-width: fit-content;
+  border-radius: 30px;
+  padding: 6px 1rem;
+  margin: 0 auto 0.5rem auto;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.carousel-image {
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-indicators .active {
+  background-color: var(--main-color) !important;
+}
+
+.homepage-card {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+.homepage-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nav-link-underline {
+  border-bottom: 2px solid var(--main-color);
 }

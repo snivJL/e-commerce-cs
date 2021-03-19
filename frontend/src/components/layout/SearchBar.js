@@ -24,7 +24,7 @@ const SearchBar = ({ classes, admin }) => {
             placeholder={admin ? "Filter" : "What are you looking for ?"}
             onChange={handleChange}
           />
-          <i className="fa fa-search icon-searchbar"></i>
+          <i className="fas fa-search"></i>
         </form>
       </div>
     </>

@@ -7,6 +7,7 @@ import {
   ListGroup,
   Card,
   Button,
+  Spinner,
 } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,7 @@ const PlaceOrderPage = () => {
   const paymentMethod = useSelector((state) => state.order.paymentMethod);
   if (!paymentMethod) history.push("/payment");
   const order = useSelector((state) => state.order);
+  const loading = useSelector((state) => state.order.loading);
   const cartPrice = order.cart.reduce(
     (acc, item) => acc + item.product.price * item.qty,
     0
@@ -116,7 +118,19 @@ const PlaceOrderPage = () => {
                     dispatch(orderActions.createOrder(order, cartPrice))
                   }
                 >
-                  Place Order
+                  {loading ? (
+                    <>
+                      <Spinner
+                        className="mr-2"
+                        as="span"
+                        size="sm"
+                        animation="border"
+                      />
+                      Place Order
+                    </>
+                  ) : (
+                    "Place order"
+                  )}
                 </Button>
               </ListGroup.Item>
             </ListGroup>

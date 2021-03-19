@@ -4,7 +4,7 @@ const initialState = {
   cart: JSON.parse(localStorage.getItem("cartItems")) || [],
   shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || [],
   paymentMethod: JSON.parse(localStorage.getItem("paymentMethod")) || [],
-  loading: true,
+  loading: false,
 };
 const orderReducer = (state = initialState, action) => {
   const { type, payload } = action;

@@ -5,6 +5,14 @@ import { Row, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const TopProductsCarousel = ({ products }) => {
+  const styles = {
+    height: 400,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "20px",
+  };
+
   const slider = useRef();
   const onSelect = (active, direction) => {
     console.log(`active=${active} && direction=${direction}`);
@@ -12,6 +20,7 @@ const TopProductsCarousel = ({ products }) => {
   return (
     <Row>
       <Col md={12}>
+        <h2 className="ml-5">Top Products</h2>
         <RBCarousel
           className="carousel-fade"
           animation={true}
@@ -25,10 +34,19 @@ const TopProductsCarousel = ({ products }) => {
           version={4}
         >
           {products
+            .sort((a, b) => b.rating - a.rating)
             .map((i) => (
-              <Link to={`/product/${i._id}`}>
-                <Image fluid src={i.images[0].imageUrl} alt="product"></Image>
-              </Link>
+              <div style={{ ...styles }}>
+                <Link key={i._id} to={`/product/${i._id}`}>
+                  <Image
+                    className="carousel-image"
+                    fluid
+                    src={i.images[0].imageUrl}
+                    alt="product"
+                  ></Image>
+                </Link>
+                <div className="carousel-caption">{i.name}</div>
+              </div>
             ))
             .slice(0, 5)}
         </RBCarousel>

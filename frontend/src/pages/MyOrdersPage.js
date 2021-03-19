@@ -58,17 +58,28 @@ const MyOrdersPage = () => {
                   </td>
                   <td className="d-flex flex-column align-items-center">
                     {o.status === "pending" && (
-                      <Button
-                        onClick={() =>
-                          dispatch(userActions.makePayment(userId, o._id))
-                        }
-                        style={{ backgroundColor: "#fd5c32", color: "white" }}
-                        className="rounded btn btn-block"
-                        size="sm"
-                        variant="light"
-                      >
-                        Pay Now
-                      </Button>
+                      <>
+                        <Button
+                          onClick={() =>
+                            dispatch(userActions.makePayment(userId, o._id))
+                          }
+                          style={{ backgroundColor: "#fd5c32", color: "white" }}
+                          className="rounded btn btn-block"
+                          size="sm"
+                          variant="light"
+                        >
+                          Pay Now
+                        </Button>
+                        <Button
+                          onClick={() =>
+                            dispatch(userActions.cancelOrder(o._id))
+                          }
+                          className="rounded btn btn-danger btn-block"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                      </>
                     )}
                     <EditOrderModal order={o} />
                   </td>
