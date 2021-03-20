@@ -23,9 +23,9 @@ authActions.login = (values) => async (dispatch) => {
 
 authActions.logout = () => async (dispatch) => {
   console.log("LOGOUT");
+  localStorage.removeItem("token");
   dispatch({ type: types.LOGOUT_USER });
   toast.success("See you soon!");
-  localStorage.removeItem("token");
 };
 console.log(authActions);
 export default authActions;

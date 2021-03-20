@@ -6,11 +6,13 @@ import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Product from "../components/products/Product";
 import TopProductsCarousel from "../components/products/TopProductsCarousel";
+import Pagination from "../components/Pagination";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const keywords = useParams().keywords;
-  const { products, loading } = useSelector((state) => state.product);
+  const products = useSelector((state) => state.product.products);
+  const loading = useSelector((state) => state.product.loading);
   useEffect(() => {
     dispatch(productActions.getAllProducts(keywords));
   }, [dispatch, keywords]);
@@ -30,6 +32,7 @@ const HomePage = () => {
           </>
         )}
       </Row>
+      <Pagination />
     </>
   );
 };

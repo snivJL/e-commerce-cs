@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Row, Col, Modal } from "react-bootstrap";
+import { Form, Button, Row, Col, Modal, Image } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import productActions from "../../redux/actions/product.actions";
@@ -7,12 +7,24 @@ import productActions from "../../redux/actions/product.actions";
 const EditProductModal = ({ product }) => {
   const { name, description, price, images, _id } = product;
   const [show, setShow] = useState(false);
+  const [newImages, setNewImages] = useState(images);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const [inputs, setInputs] = useState(1);
-  const [array, setArray] = useState(["image"]);
+  const widget = window.cloudinary.createUploadWidget(
+    { cloudName: "dilv93gvb", uploadPreset: "coderShop", maxFileSize: 300000 },
+    (error, result) => {
+      // console.log(result);
+      if (result.event && result.event === "success")
+        setNewImages((images) => [
+          ...images,
+          { imageUrl: result.info.secure_url },
+        ]);
+      console.log(result);
+    }
+  );
+  // const [inputs, setInputs] = useState(1);
+  // const [array, setArray] = useState(["image"]);
   const dispatch = useDispatch();
   const validate = (values) => {
     const errors = {};
@@ -33,20 +45,20 @@ const EditProductModal = ({ product }) => {
       dispatch(productActions.editProduct(values));
     },
   });
-  const handleInputs = (e) => {
-    e.preventDefault();
-    if (e.target.name === "add") {
-      setInputs((inputs) => inputs + 1);
-      setArray([...array, `image${inputs + 1}`]);
-    } else {
-      setInputs((inputs) => inputs - 1);
-      array.splice(-1, 1);
-      setArray(array);
-    }
-  };
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
+  // const handleInputs = (e) => {
+  //   e.preventDefault();
+  //   if (e.target.name === "add") {
+  //     setInputs((inputs) => inputs + 1);
+  //     setArray([...array, `image${inputs + 1}`]);
+  //   } else {
+  //     setInputs((inputs) => inputs - 1);
+  //     array.splice(-1, 1);
+  //     setArray(array);
+  //   }
+  // };
+  // useEffect(() => {
+  //   console.log(inputs);
+  // }, [inputs]);
   return (
     <>
       <Button variant="light" onClick={handleShow}>
@@ -103,6 +115,24 @@ const EditProductModal = ({ product }) => {
                 ) : null}
               </Form.Group>
               <Form.Group>
+                {images.length > 0 &&
+                  images.map((i) => (
+                    <Image
+                      key={i._id}
+                      style={{ width: "120px" }}
+                      thumbnail
+                      src={i.imageUrl}
+                    ></Image>
+                  ))}
+                <Button
+                  block
+                  className="btn btn-primary"
+                  onClick={() => widget.open()}
+                >
+                  Upload images
+                </Button>
+              </Form.Group>
+              {/* <Form.Group>
                 <Form.Label>Image Links</Form.Label>
                 <Button
                   onClick={(e) => handleInputs(e)}
@@ -141,7 +171,7 @@ const EditProductModal = ({ product }) => {
                 {formik.touched.images && formik.errors.images ? (
                   <div>{formik.errors.images}</div>
                 ) : null}
-              </Form.Group>
+              </Form.Group> */}
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Close

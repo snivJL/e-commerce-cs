@@ -48,7 +48,8 @@ const PublicLinks = () => {
 };
 
 const AuthLinks = () => {
-  const { loading, user } = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.auth.loading);
+  const user = useSelector((state) => state.auth.user);
 
   const dispatch = useDispatch();
   return (

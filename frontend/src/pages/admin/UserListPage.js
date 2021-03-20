@@ -5,7 +5,9 @@ import { Row, Col, Button, Table, Modal, Form } from "react-bootstrap";
 import userActions from "../../redux/actions/user.actions";
 
 const UserListPage = () => {
-  const { users, loading, selectedUser } = useSelector((state) => state.user);
+  const users = useSelector((state) => state.user.users);
+  const selectedUser = useSelector((state) => state.user.selectedUser);
+  const loading = useSelector((state) => state.user.loading);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);

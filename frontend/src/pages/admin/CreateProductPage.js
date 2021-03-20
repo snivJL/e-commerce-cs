@@ -7,8 +7,9 @@ import productActions from "../../redux/actions/product.actions";
 const CreateProductPage = () => {
   const [images, setImages] = useState([{}]);
   const dispatch = useDispatch();
+
   const widget = window.cloudinary.createUploadWidget(
-    { cloudName: "dilv93gvb", uploadPreset: "coderShop" },
+    { cloudName: "dilv93gvb", uploadPreset: "coderShop", maxFileSize: 100000 },
     (error, result) => {
       // console.log(result);
       if (result.event && result.event === "success")
@@ -33,12 +34,8 @@ const CreateProductPage = () => {
 
     if (!values.images) {
       errors.images = "Required";
-    } else if (
-      !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g.test(
-        values.images[0]
-      )
-    )
-      return errors;
+    }
+    return errors;
   };
   const formik = useFormik({
     initialValues: {

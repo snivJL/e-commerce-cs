@@ -14,6 +14,7 @@ main {
 
 .containerCustom {
   background-color: white;
+  height: 100vh;
 }
 .searchbar {
   position: relative;
@@ -135,4 +136,55 @@ main {
 
 .nav-link-underline {
   border-bottom: 2px solid var(--main-color);
+}
+.pagination {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  margin: 10px auto;
+  padding: 0.5rem 2rem;
+  width: fit-content;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.pagination .active {
+  background-color: var(--main-color);
+  padding: 0.5rem;
+  color: white;
+  border-radius: 10px;
+  margin: 0 0.2rem;
+}
+
+.pagination > li {
+  padding: 0.5rem;
+}
+a {
+  outline: none;
+}
+.pagination > li:hover {
+  background-color: var(--main-color);
+  color: white;
+  border-radius: 10px;
+}
+
+.previous,
+.next {
+  background-color: var(--main-color-faded);
+  border-radius: 50%;
+  padding: 0px;
+  width: 37px;
+  height: 37px;
+  color: white;
+  text-align: center;
+}
+.previous {
+  margin-right: 6px;
+}
+li .next {
+  margin-left: 6px;
+  padding: 10px;
+}
+
+.previous > a {
+  padding: 0;
+  width: 19px;
 }

@@ -10,7 +10,8 @@ import Moment from "react-moment";
 const MyOrdersPage = () => {
   const userId = useParams().id;
   const dispatch = useDispatch();
-  const { myOrders, loading } = useSelector((state) => state.user);
+  const myOrders = useSelector((state) => state.user.myOrders);
+  const loading = useSelector((state) => state.user.loading);
   useEffect(() => {
     dispatch(userActions.getUserOrders(userId));
   }, [dispatch, userId]);

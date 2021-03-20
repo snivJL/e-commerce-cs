@@ -3,6 +3,7 @@ import * as types from "../constants/product.constants";
 const initialState = {
   loading: true,
   products: [],
+  pageCount: 0,
   deletedProducts: [],
   selectedProduct: { images: [{}] },
 };
@@ -16,7 +17,12 @@ const productReducer = (state = initialState, action) => {
     case types.GET_DELETED_PRODUCTS_REQUEST:
       return { ...state, loading: true };
     case types.GET_PRODUCTS_SUCCESS:
-      return { ...state, products: payload, loading: false };
+      return {
+        ...state,
+        products: payload.products,
+        pageCount: payload.totalPages,
+        loading: false,
+      };
     case types.GET_DELETED_PRODUCTS_SUCCESS:
       return { ...state, deletedProducts: payload, loading: false };
     case types.GET_SINGLE_PRODUCT_SUCCESS:

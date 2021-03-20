@@ -50,7 +50,7 @@ const orderReducer = (state = initialState, action) => {
     case types.CREATE_ORDER_REQUEST:
       return { ...state, loading: true };
     case types.CREATE_ORDER_SUCCESS:
-      return { ...state, loading: false };
+      return { ...state, loading: false, cart: [] };
 
     case types.CREATE_ORDER_FAIL:
       return { ...state, loading: false };

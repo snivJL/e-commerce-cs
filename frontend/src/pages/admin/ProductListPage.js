@@ -9,9 +9,9 @@ import Searchbar from "../../components/layout/SearchBar";
 
 const ProductListPage = () => {
   const keywords = useParams().keywords;
-  const { products, loading, deletedProducts } = useSelector(
-    (state) => state.product
-  );
+  const products = useSelector((state) => state.product.products);
+  const deletedProducts = useSelector((state) => state.product.deletedProducts);
+  const loading = useSelector((state) => state.product.loading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(productActions.getAllProducts(keywords));
@@ -21,11 +21,11 @@ const ProductListPage = () => {
   }, [dispatch]);
   return (
     <Row>
-      <Col md={12}>
+      <Col md={12} className="justify-content-center">
         <h2>Active Product List</h2>
         <Searchbar admin={true} />
         {loading ? (
-          <Loader />
+          <Loader className="justify-self-center mx-auto" />
         ) : (
           <>
             <ListGroup variant="flush">
@@ -88,7 +88,7 @@ const ProductListPage = () => {
                         variant="light"
                         size="sm"
                       >
-                        <i class="fas fa-trash-restore"></i>
+                        <i className="fas fa-trash-restore"></i>
                       </Button>
                     </Col>
                   </Row>

@@ -4,13 +4,15 @@ import { toast } from "react-toastify";
 
 const productActions = {};
 
-productActions.getAllProducts = (keywords = "") => async (dispatch) => {
+productActions.getAllProducts = (keywords = "", page = 1) => async (
+  dispatch
+) => {
   try {
     dispatch({ type: types.GET_PRODUCTS_REQUEST });
-    const { data } = await api.get(`/product?search=${keywords}`);
+    const { data } = await api.get(`/product?search=${keywords}&page=${page}`);
     dispatch({
       type: types.GET_PRODUCTS_SUCCESS,
-      payload: data.data.products,
+      payload: data.data,
     });
   } catch (error) {
     console.error(error);
